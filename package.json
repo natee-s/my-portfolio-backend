@@ -1,0 +1,31 @@
+{
+  "name": "natee-portfolio-backend",
+  "version": "1.0.0",
+  "description": "Backend API for portfolio project",
+  "homepage": "https://github.com/natee-s/my-portfolio-backend#readme",
+  "bugs": {
+    "url": "https://github.com/natee-s/my-portfolio-backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/natee-s/my-portfolio-backend.git"
+  },
+  "license": "ISC",
+  "author": "Natee.S",
+  "type": "module",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server/index.js",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mongoose": "^9.1.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
