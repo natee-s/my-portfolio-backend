@@ -15,9 +15,9 @@ const app = express();
 //ตั้งค่า Middleware
 //เปิดใช้งาน CORS ทำให้ frontend ที่รันอยู่บนโดเมนอื่นสามารถเรียกใช้ API นี้ได้
 app.use(cors({
-    origin:['http:localhost:5173','https://my-portfolio-nine-nu-uwdfqx2mwu.vercel.app/'],
+    origin:['https://my-portfolio-nine-nu-uwdfqx2mwu.vercel.app'],
     methods:['GET','POST'],
-    Credential: true
+    credentials: true
 }));  
 app.use(express.json()); //ตั้งค่าให้เซิร์ฟเวอร์สามารถรับและแปลงข้อมูล JSON ที่ส่งมาได้ (เช่น ข้อมูลจาก POST request)
 app.use('/api/contact', contactRoutes) //ถ้ามี request ที่ขึ้นต้นด้วย /api/contact ให้ส่งต่อไปจัดการที่ contactRoutes
