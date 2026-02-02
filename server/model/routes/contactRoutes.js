@@ -8,11 +8,14 @@ const router = express.Router();
 
 //create function for sent the email
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
     auth:{
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
     },
+    connectionTimeout: 10000,
 })
 
 //สร้าง Route สำหรับรับข้อมูล (POST)
@@ -40,14 +43,14 @@ router.post('/', async(req, res) =>{
             text: `คุณได้รับข้อความใหม่จาก Portfolio:\n\nname:${name}\nemail:${email}\nText:${message}`
         };
 
-        //สั่งให้ส่ง email
-        transporter.sendMail(mailOption,(error, info) => {
-            if(error){
-                console.log('Error sending email:', error)
-            } else {
-                console.log('Email sent:' + info.response);
-            }
-        })
+        //สั่งให้ส่ง email แบบ "รอให้ส่งเสร็จ"
+        try{
+            const info = await transporter.sendMail(mailOption);
+            console.log('Email sent' + info.response);
+        } catch (mailError){
+            // ถ้าส่งเมลพลาด ให้แสดง error ใน console แต่ยังให้บันทึกลง DB สำเร็จ
+            console.log('Error sending email:', mailError);
+        }
 
         //.json() คือการ 👉 ส่งข้อมูลกลับไปให้ client ในรูปแบบ JSON
         res.status(201).json({message:'Message sent successfully.We will contact you as soon as possible.'});
